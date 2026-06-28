@@ -7,6 +7,15 @@ Cranny is a tiny macOS menu-bar app that browses a YouTube channel's uploads and
 
 The name comes from "nook and cranny": a little player that sits in a corner and stays out of the way.
 
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="docs/browser.png" alt="Channel browser popover" height="360"><br><sub>Browse a channel from the menu bar</sub></td>
+      <td align="center"><img src="docs/player.png" alt="Floating corner player" width="360"><br><sub>Play in a floating corner window</sub></td>
+    </tr>
+  </table>
+</div>
+
 ## What it does
 
 Add one or more YouTube channels and Cranny lists their uploads newest first, with thumbnails, titles, durations, and dates. Click a video and it plays in a small floating window. At rest that window looks like a compact audio player with a tiny live video next to it. Hover it and it grows into a full 16:9 frame with YouTube's own controls, then shrinks back when you move away.
