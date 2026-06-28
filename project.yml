@@ -1,0 +1,41 @@
+name: Cranny
+options:
+  bundleIdPrefix: com.alanko.cranny
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    PRODUCT_BUNDLE_IDENTIFIER: com.alanko.cranny
+    DEVELOPMENT_TEAM: ""            # set to your 10-char Team ID for signed/notarized builds
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_HARDENED_RUNTIME: YES    # required for notarization
+    SWIFT_STRICT_CONCURRENCY: complete
+
+targets:
+  Cranny:
+    type: application
+    platform: macOS
+    sources:
+      - path: Cranny
+    # XcodeGen synthesizes the Info.plist from this block on every `generate`.
+    info:
+      path: Cranny/Info.generated.plist
+      properties:
+        CFBundleDisplayName: Cranny
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+        # Menu-bar-only: no Dock icon, no Force-Quit entry, no main menu bar.
+        LSUIElement: true
+        NSHumanReadableCopyright: "Copyright © 2026 Alan Ko. MIT License."
+    entitlements:
+      path: Cranny/Cranny.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.network.client: true
