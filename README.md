@@ -1,81 +1,57 @@
 # Cranny
 
-A tiny macOS menu-bar app that browses a YouTube channel's videos and plays them in a small,
-always-on-top floating window tucked into a corner of your screen. Open source, lightweight,
-and respectful of YouTube's Terms of Service.
+> [!WARNING]
+> Cranny is still in active development. Things will change, break, or behave oddly without notice. Expect rough edges, and use it at your own risk.
 
-> The name "Cranny" (as in "nook and cranny") reflects the idea: a little player that tucks
-> into a corner and stays out of the way.
+Cranny is a tiny macOS menu-bar app that browses a YouTube channel's uploads and plays a video in a small, always-on-top window you can tuck into a corner of your screen. It is open source, native, and built to stay within YouTube's Terms of Service.
+
+The name comes from "nook and cranny": a little player that sits in a corner and stays out of the way.
 
 ## What it does
 
-- **Browse a channel** — add YouTube channels and see a scrollable list of their uploads
-  (newest first) with thumbnails, titles, durations, and dates.
-- **Play in a corner** — click a video and it plays in a small, draggable, **always-on-top**
-  window. Resting, it looks like a floating audio player with a tiny live video; hover it and
-  it expands to a full 16:9 frame with YouTube's native controls.
+Add one or more YouTube channels and Cranny lists their uploads newest first, with thumbnails, titles, durations, and dates. Click a video and it plays in a small floating window. At rest that window looks like a compact audio player with a tiny live video next to it. Hover it and it grows into a full 16:9 frame with YouTube's own controls, then shrinks back when you move away.
 
-The player follows you across Spaces, floats over fullscreen apps, and never steals focus from
-whatever you're working in.
+The player stays above your other windows, follows you across Spaces, floats over fullscreen apps, and never steals keyboard focus from whatever you are working in. You can also paste a video link to play it directly, without adding its channel.
 
-## Compliance (by design)
+## Compliance
 
-Cranny is deliberately **ToS-compliant**, which rules out some things on purpose:
-
-- The player stays **genuinely visible** (small is fine; never hidden, 0px, or off-screen).
-- **YouTube's native controls and ads are left untouched** — no ad-skipping, no audio-only,
-  no background/keep-playing-when-hidden, no downloading or audio extraction.
-- Playback is through YouTube's **official IFrame Player API**; channel data comes from the
-  **YouTube Data API v3**. Closing the player stops playback.
+Cranny is built to respect YouTube's Terms of Service, which rules out a few things on purpose. The player is always genuinely visible (small is fine, hidden or off-screen is not). YouTube's native controls and ads are left alone: no ad-skipping, no audio-only mode, no background playback, no downloading. Playback runs through YouTube's official IFrame Player, channel data comes from the YouTube Data API v3, and closing the player stops playback.
 
 ## Requirements
 
 - macOS 14 (Sonoma) or later
-- Xcode 16+ and [XcodeGen](https://github.com/yonaskolb/XcodeGen) to build from source
-- Your **own** YouTube Data API key (free — see below)
+- Xcode 16 or later and [XcodeGen](https://github.com/yonaskolb/XcodeGen) to build from source
+- Your own YouTube Data API key (free, see below)
 
 ## Build from source
 
 ```sh
 brew install xcodegen
-xcodegen generate          # generates Cranny.xcodeproj from project.yml
-open Cranny.xcodeproj       # then build & run (⌘R), or:
-# xcodebuild -project Cranny.xcodeproj -scheme Cranny -configuration Debug build
+xcodegen generate
+open Cranny.xcodeproj
 ```
 
-The `.xcodeproj` is generated and git-ignored. After adding/removing source files, re-run
-`xcodegen generate`.
+Then build and run with Cmd-R. The `.xcodeproj` is generated from `project.yml` and is git-ignored, so run `xcodegen generate` again whenever you add or remove a source file.
 
-## Get a free YouTube Data API key
+## Get a free API key
 
-Cranny ships **no API key** (that would violate the API ToS in a public repo). Each user
-brings their own:
+Cranny ships no API key. Bundling one in a public repo would break the API terms, so each person brings their own.
 
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
-2. Create a project (or pick one).
-3. **APIs & Services → Library →** enable **"YouTube Data API v3"**.
-4. **APIs & Services → Credentials → Create credentials → API key.**
-5. Open Cranny's **Settings → API Key** and paste it.
+1. Open the [Google Cloud Console](https://console.cloud.google.com/) and create a project, or pick one you already have.
+2. Open the [YouTube Data API v3 page](https://console.cloud.google.com/apis/library/youtube.googleapis.com) and click Enable.
+3. Under APIs & Services, open Credentials and create an API key.
+4. Open Cranny's Settings, go to the API Key tab, and paste it.
 
-The key is stored in your **macOS Keychain** — never bundled, logged, or shared. Typical usage
-is a few quota units per channel refresh, far under the free 10,000 units/day.
+The key is stored in your macOS Keychain. It is never bundled, logged, or sent anywhere except Google's own API. Normal use costs a handful of quota units per channel refresh, well under the free daily allowance of 10,000.
 
 ## Adding channels
 
-In **Settings → Channels** (or the `＋` in the popover), paste a channel's **`@handle`** or a
-**`youtube.com/channel/UC…`** URL. Legacy `/c/` and `/user/` URLs aren't supported — open the
-channel on YouTube and copy its `@handle` instead.
+In Settings under Channels, or the plus button in the popover, paste a channel's `@handle` or a `youtube.com/channel/UC...` URL. Cranny looks it up and shows a preview before you add it. Older `/c/` and `/user/` URLs are not supported, because there is no cheap way to resolve them. Open the channel on YouTube and copy its `@handle` instead.
 
-## Privacy & attribution
+## Privacy and attribution
 
-Cranny talks only to Google/YouTube endpoints (over HTTPS) to fetch metadata and play videos.
-Playback data is shared with YouTube and subject to
-[YouTube's Terms of Service](https://www.youtube.com/t/terms) and
-[Google's Privacy Policy](https://policies.google.com/privacy). Use of the API is governed by
-the [YouTube API Services Terms](https://developers.google.com/youtube/terms/api-services-terms-of-service).
-Video and channel metadata are shown as returned by the API, and every video links back to its
-YouTube watch page.
+Cranny only talks to Google and YouTube over HTTPS, to fetch metadata and play videos. Playback data is shared with YouTube and falls under [YouTube's Terms of Service](https://www.youtube.com/t/terms) and [Google's Privacy Policy](https://policies.google.com/privacy). API use is governed by the [YouTube API Services Terms](https://developers.google.com/youtube/terms/api-services-terms-of-service). Video and channel details are shown as the API returns them, and every video links back to its YouTube watch page.
 
 ## License
 
-MIT.
+MIT. See [LICENSE](LICENSE).
