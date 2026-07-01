@@ -3,7 +3,7 @@
 > [!WARNING]
 > Cranny is still in active development. Things will change, break, or behave oddly without notice. Expect rough edges, and use it at your own risk.
 
-Cranny is a tiny macOS menu-bar app that browses a YouTube channel's uploads and plays a video in a small, always-on-top window you can tuck into a corner of your screen. It is open source, native, and built to stay within YouTube's Terms of Service.
+Cranny is a tiny macOS menu-bar app that browses a YouTube channel's uploads and plays a video in a small, always-on-top window you can tuck into a corner of your screen. It is open source and native.
 
 The name comes from "nook and cranny": a little player that sits in a corner and stays out of the way.
 
@@ -21,10 +21,6 @@ The name comes from "nook and cranny": a little player that sits in a corner and
 Add one or more YouTube channels and Cranny lists their uploads newest first, with thumbnails, titles, durations, and dates. Click a video and it plays in a small floating window. At rest that window looks like a compact audio player with a tiny live video next to it. Hover it and it grows into a full 16:9 frame with YouTube's own controls, then shrinks back when you move away.
 
 The player stays above your other windows, follows you across Spaces, floats over fullscreen apps, and never steals keyboard focus from whatever you are working in. You can also paste a video link to play it directly, without adding its channel.
-
-## Compliance
-
-Cranny is built to respect YouTube's Terms of Service, which rules out a few things on purpose. The player is always genuinely visible (small is fine, hidden or off-screen is not). YouTube's native controls and ads are left alone: no ad-skipping, no audio-only mode, no background playback, no downloading. Playback runs through YouTube's official IFrame Player, channel data comes from the YouTube Data API v3, and closing the player stops playback.
 
 ## Requirements
 
@@ -44,7 +40,7 @@ Then build and run with Cmd-R. The `.xcodeproj` is generated from `project.yml` 
 
 ## Get a free API key
 
-Cranny ships no API key. Bundling one in a public repo would break the API terms, so each person brings their own.
+Cranny ships no API key. A key committed to a public repo gets scraped and abused within hours, so each person brings their own.
 
 1. Open the [Google Cloud Console](https://console.cloud.google.com/) and create a project, or pick one you already have.
 2. Open the [YouTube Data API v3 page](https://console.cloud.google.com/apis/library/youtube.googleapis.com) and click Enable.
